@@ -61,3 +61,11 @@ LEFT JOIN EmployeeTraining et
 ON e.Id = et.EmployeeId
 GROUP BY (e.FirstName + ' ' + e.LastName), et.EmployeeId
 Having Count(et.TrainingProgramId) > 0;
+
+-- 8) List all training programs along with the count employees who have signed up for each.
+SELECT tp.Name, Count(et.EmployeeId) AS "Signed Up Employees"
+FROM TrainingProgram tp 
+LEFT JOIN EmployeeTraining et 
+ON tp.Id = et.TrainingProgramId
+GROUP BY tp.Name
+Having Count(et.EmployeeId) >= 0;
