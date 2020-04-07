@@ -53,3 +53,11 @@ FROM Employee e
 LEFT JOIN EmployeeTraining et
 ON e.Id = et.EmployeeId
 WHERE et.EmployeeId IS Null;
+
+-- 7) List the employee full names for employees who are signed up for at least one training program and include the number of training programs they are signed up for.
+SELECT (e.FirstName + ' ' + e.LastName) AS FullName, Count(et.TrainingProgramId) AS 'Programs Signed Up For'
+FROM Employee e
+LEFT JOIN EmployeeTraining et
+ON e.Id = et.EmployeeId
+GROUP BY (e.FirstName + ' ' + e.LastName), et.EmployeeId
+Having Count(et.TrainingProgramId) > 0;
